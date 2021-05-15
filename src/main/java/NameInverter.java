@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NameInverter {
@@ -20,7 +19,7 @@ public class NameInverter {
     }
 
     private static List<String> breakIntoPartsIgnoringWhitespace(String name) {
-        return new ArrayList<>(Arrays.asList(name.trim().split(RegularExpressions.anyAmountOfWhitespace())));
+        return new ArrayList<>(List.of(name.trim().split(RegularExpressions.anyAmountOfWhitespace())));
     }
 
     private static String invert(List<String> nameParts) {
