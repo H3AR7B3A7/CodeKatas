@@ -1,20 +1,20 @@
 public class FizzBuzz {
 
-    public static String of(int i) {
-        if (i == 0)
+    public static String of(int n) {
+        if (n == 0)
             return "0";
 
         String s = "";
 
-        if (isDivisibleBy(i, 3))
+        if (isDivisibleBy(n, 3))
             s += "Fizz";
-        if (isDivisibleBy(i, 5))
+        if (isDivisibleBy(n, 5))
             s += "Buzz";
 
-        return s.isEmpty() ? String.valueOf(i) : s;
+        return s.isEmpty() ? String.valueOf(n) : s;
     }
 
-    private static boolean isDivisibleBy(int i, int divisor) {
-        return i % divisor == 0;
+    private static boolean isDivisibleBy(int n, int divisor) {
+        return n % divisor == 0;
     }
 }
