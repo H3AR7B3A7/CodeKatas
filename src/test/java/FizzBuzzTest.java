@@ -6,36 +6,36 @@ class FizzBuzzTest {
 
     @Test
     void of_0is0() {
-        assertEquals(FizzBuzz.of(0), "0");
+        assertEquals("0", FizzBuzz.of(0));
     }
 
     @Test
     void of_1is1() {
-        assertEquals(FizzBuzz.of(1), "1");
+        assertEquals("1", FizzBuzz.of(1));
     }
 
     @Test
     void of_3isFizz() {
-        assertEquals(FizzBuzz.of(3), "Fizz");
+        assertEquals("Fizz", FizzBuzz.of(3));
     }
 
     @Test
     void of_5isBuzz() {
-        assertEquals(FizzBuzz.of(5), "Buzz");
+        assertEquals("Buzz", FizzBuzz.of(5));
     }
 
     @Test
     void of_6isFizz() {
-        assertEquals(FizzBuzz.of(6), "Fizz");
+        assertEquals("Fizz", FizzBuzz.of(6));
     }
 
     @Test
     void of_10isBuzz() {
-        assertEquals(FizzBuzz.of(10), "Buzz");
+        assertEquals("Buzz", FizzBuzz.of(10));
     }
 
     @Test
     void of_15isFizzBuzz() {
-        assertEquals(FizzBuzz.of(15), "FizzBuzz");
+        assertEquals("FizzBuzz", FizzBuzz.of(15));
     }
 }
