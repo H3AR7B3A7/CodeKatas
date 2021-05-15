@@ -4,4 +4,5 @@
 
 - FizzBuzz
 - Name Inverter
+- Prime Factors
 - ...
