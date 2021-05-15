@@ -5,4 +5,5 @@
 - FizzBuzz
 - Name Inverter
 - Prime Factors
+- Bowling Game
 - ...
