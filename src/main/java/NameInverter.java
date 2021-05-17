@@ -1,3 +1,5 @@
+import utils.RegularExpressions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +36,6 @@ public class NameInverter {
         for (String np : nameParts.subList(2, nameParts.size()))
             postNominal += np + " ";
         return postNominal;
-    }
-
-}
-
-class RegularExpressions {
-
-    public static String anyAmountOfWhitespace() {
-        return "\\s+";
     }
 }
 
