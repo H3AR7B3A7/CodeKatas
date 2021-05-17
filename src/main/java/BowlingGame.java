@@ -37,5 +37,4 @@ public class BowlingGame {
     private boolean isSpare(int cursor) {
         return rolls[cursor] + rolls[cursor + 1] == 10;
     }
-
 }
