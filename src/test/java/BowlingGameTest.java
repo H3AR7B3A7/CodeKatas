@@ -41,4 +41,5 @@ class BowlingGameTest {
         game.roll(10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10);
         assertEquals(300, game.score());
     }
+
 }
