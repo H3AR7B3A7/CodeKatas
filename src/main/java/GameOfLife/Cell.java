@@ -1,7 +1,8 @@
+package GameOfLife;
+
 import java.util.Objects;
 
-public class Cell {
-
+class Cell {
     public final int x;
     public final int y;
 
