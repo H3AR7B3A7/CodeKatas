@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import static com.gildedrose.ItemType.AGED_BRIE;
 import static com.gildedrose.ItemType.BACKSTAGE_PASSES;
+import static com.gildedrose.ItemType.CONJURED_ITEM;
 import static com.gildedrose.ItemType.SULFURAS;
 
 class GildedRose {
@@ -82,7 +83,8 @@ class GildedRose {
     }
 
     private int getExpiryRate(Item item) {
-        return isExpired(item) ? -2 : -1;
+        int baseRate = isExpired(item) ? -2 : -1;
+        return isConjured(item) ? baseRate * 2 : baseRate;
     }
 
     private boolean isNearExpiry(Item item) {
@@ -103,5 +105,9 @@ class GildedRose {
 
     private boolean isUnderMinQuality(Integer quality) {
         return quality < MIN_QUALITY;
+    }
+
+    private boolean isConjured(Item item) {
+        return item.name.equals(CONJURED_ITEM.getName());
     }
 }
