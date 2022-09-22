@@ -4,16 +4,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static com.gildedrose.ItemType.AGED_BRIE;
+import static com.gildedrose.ItemType.BACKSTAGE_PASSES;
+import static com.gildedrose.ItemType.SULFURAS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GildedRoseTest {
 
     private static GildedRose app;
-    private static final String AGED_BRIE = "Aged Brie";
-    private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
-    private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
-    private static final String CONJURED_ITEM = "Conjured Mana Cake";
 
     @Nested
     @DisplayName("Given an array with an item")
@@ -25,11 +24,11 @@ class GildedRoseTest {
             @DisplayName("The item name does not change")
             void foo() {
                 Item[] items = new Item[]{new Item("foo", 0, 0)};
-                GildedRose app = new GildedRose(items);
+                GildedRose app = GildedRose.createStoreWith(items);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
-                assertEquals("foo", app.items[0].name);
+                assertEquals("foo", app.getInventory().get(0).name);
             }
         }
     }
@@ -45,7 +44,7 @@ class GildedRoseTest {
             void itemsDegrade() {
                 storeWith("Vest", 10, 20);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(9);
                 assertThat(quality()).isEqualTo(19);
@@ -60,7 +59,7 @@ class GildedRoseTest {
             void itemsDegrade() {
                 storeWith("Vest", 0, 20);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(-1);
                 assertThat(quality()).isEqualTo(18);
@@ -75,7 +74,7 @@ class GildedRoseTest {
             void itemsDegrade() {
                 storeWith("Vest", 10, 0);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(9);
                 assertThat(quality()).isEqualTo(0);
@@ -92,9 +91,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("Then the quality increases by 1")
             void itemsDegrade() {
-                storeWith(AGED_BRIE, 10, 20);
+                storeWith(AGED_BRIE.getName(), 10, 20);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(9);
                 assertThat(quality()).isEqualTo(21);
@@ -107,9 +106,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("Then the quality increases by 2")
             void itemsDegrade() {
-                storeWith(AGED_BRIE, 0, 20);
+                storeWith(AGED_BRIE.getName(), 0, 20);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(-1);
                 assertThat(quality()).isEqualTo(22);
@@ -122,9 +121,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("Then the quality stays the same")
             void itemsDegrade() {
-                storeWith(AGED_BRIE, 0, 49);
+                storeWith(AGED_BRIE.getName(), 0, 49);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(-1);
                 assertThat(quality()).isEqualTo(50);
@@ -141,9 +140,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("The quality or selIn never changes")
             void itemsDegrade() {
-                storeWith(SULFURAS, 10, 20);
+                storeWith(SULFURAS.getName(), 10, 20);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(10);
                 assertThat(quality()).isEqualTo(20);
@@ -156,9 +155,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("The quality or selIn never changes")
             void itemsDegrade() {
-                storeWith(SULFURAS, 0, 0);
+                storeWith(SULFURAS.getName(), 0, 0);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(0);
                 assertThat(quality()).isEqualTo(0);
@@ -175,9 +174,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("The quality increases by 1")
             void itemsDegrade() {
-                storeWith(BACKSTAGE_PASSES, 11, 20);
+                storeWith(BACKSTAGE_PASSES.getName(), 11, 20);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(10);
                 assertThat(quality()).isEqualTo(21);
@@ -190,9 +189,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("The quality increases by 1")
             void itemsDegrade() {
-                storeWith(BACKSTAGE_PASSES, 10, 20);
+                storeWith(BACKSTAGE_PASSES.getName(), 10, 20);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(9);
                 assertThat(quality()).isEqualTo(22);
@@ -205,9 +204,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("The quality increases by 3")
             void itemsDegrade() {
-                storeWith(BACKSTAGE_PASSES, 5, 20);
+                storeWith(BACKSTAGE_PASSES.getName(), 5, 20);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(4);
                 assertThat(quality()).isEqualTo(23);
@@ -220,9 +219,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("The quality remains the same")
             void itemsDegrade() {
-                storeWith(BACKSTAGE_PASSES, 5, 49);
+                storeWith(BACKSTAGE_PASSES.getName(), 5, 49);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(4);
                 assertThat(quality()).isEqualTo(50);
@@ -235,9 +234,9 @@ class GildedRoseTest {
             @Test
             @DisplayName("The quality drops to 0")
             void itemsDegrade() {
-                storeWith(BACKSTAGE_PASSES, 0, 20);
+                storeWith(BACKSTAGE_PASSES.getName(), 0, 20);
 
-                app.updateQuality();
+                app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(-1);
                 assertThat(quality()).isEqualTo(0);
@@ -246,14 +245,14 @@ class GildedRoseTest {
     }
 
     private static void storeWith(String item, Integer sellIn, Integer quality) {
-        app = new GildedRose(new Item(item, sellIn, quality));
+        app = GildedRose.createStoreWith(new Item(item, sellIn, quality));
     }
 
     private static Integer sellIn() {
-        return app.items[0].sellIn;
+        return app.getInventory().get(0).sellIn;
     }
 
     private static Integer quality() {
-        return app.items[0].quality;
+        return app.getInventory().get(0).quality;
     }
 }

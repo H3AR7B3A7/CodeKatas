@@ -1,62 +1,107 @@
 package com.gildedrose;
 
-class GildedRose {
-    Item[] items;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
-    public GildedRose(Item ...items) {
-        this.items = items;
+import static com.gildedrose.ItemType.AGED_BRIE;
+import static com.gildedrose.ItemType.BACKSTAGE_PASSES;
+import static com.gildedrose.ItemType.SULFURAS;
+
+class GildedRose {
+    private final List<Item> items;
+    private static final Integer MAX_QUALITY = 50;
+    private static final Integer MIN_QUALITY = 0;
+    private static final Integer NEAR_EXPIRY = 10;
+    private static final Integer VERY_NEAR_EXPIRY = 5;
+    private static final Integer EXPIRED = 0;
+
+    private GildedRose(Item[] items) {
+        this.items = List.of(items);
     }
 
-    public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
+    public static GildedRose createStoreWith(Item... items) {
+        return new GildedRose(items);
+    }
 
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
+    public List<Item> getInventory() {
+        return new ArrayList<>(items);
+    }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
-
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-                    }
-                }
-            }
+    public void updateAtEndOfDay() {
+        for (Item item : items) {
+            updateQuality(item);
         }
+    }
+
+    private void updateQuality(Item item) {
+        if (isPerishable(item)) {
+            changeQuality(item, getExpiryRate(item));
+        }
+
+        if (item.name.equals(AGED_BRIE.getName())) {
+            int qualityIncrease = isExpired(item) ? 2 : 1;
+            changeQuality(item, qualityIncrease);
+        }
+
+        if (item.name.equals(BACKSTAGE_PASSES.getName())) {
+            changeBackstagePassQuality(item);
+        }
+
+        if (hasSellIn(item)) {
+            item.sellIn = item.sellIn - 1;
+        }
+    }
+
+    private void changeQuality(Item item, int delta) {
+        int updatedQuality = item.quality + delta;
+        item.quality = isOverMaxQuality(updatedQuality) ?
+            MAX_QUALITY : isUnderMinQuality(updatedQuality) ?
+            MIN_QUALITY : updatedQuality;
+    }
+
+    private void changeBackstagePassQuality(Item item) {
+        if (isExpired(item)) {
+            item.quality = MIN_QUALITY;
+        } else if (!isNearExpiry(item)) {
+            changeQuality(item, 1);
+        } else if (!isVeryNearExpiry(item)) {
+            changeQuality(item, 2);
+        } else {
+            changeQuality(item, 3);
+        }
+    }
+
+    private boolean isPerishable(Item item) {
+        return Stream.of(AGED_BRIE.getName(), BACKSTAGE_PASSES.getName(), SULFURAS.getName())
+            .noneMatch(specialItem -> specialItem.equals(item.name));
+    }
+
+    private boolean hasSellIn(Item item) {
+        return !item.name.equals(SULFURAS.getName());
+    }
+
+    private int getExpiryRate(Item item) {
+        return isExpired(item) ? -2 : -1;
+    }
+
+    private boolean isNearExpiry(Item item) {
+        return item.sellIn <= NEAR_EXPIRY;
+    }
+
+    private boolean isVeryNearExpiry(Item item) {
+        return item.sellIn <= VERY_NEAR_EXPIRY;
+    }
+
+    private boolean isExpired(Item item) {
+        return item.sellIn <= EXPIRED;
+    }
+
+    private boolean isOverMaxQuality(Integer quality) {
+        return quality > MAX_QUALITY;
+    }
+
+    private boolean isUnderMinQuality(Integer quality) {
+        return quality < MIN_QUALITY;
     }
 }
