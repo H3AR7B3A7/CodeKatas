@@ -10,6 +10,7 @@ dependencies {
     testImplementation libs.junitApi
     testImplementation libs.junitParams
     testImplementation libs.junitEngine
+    testImplementation libs.assertJ
 }
 
 group = 'com.gildedrose'
