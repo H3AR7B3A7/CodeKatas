@@ -9,7 +9,7 @@ import static com.gildedrose.ItemType.BACKSTAGE_PASSES;
 import static com.gildedrose.ItemType.CONJURED_ITEM;
 import static com.gildedrose.ItemType.SULFURAS;
 
-class GildedRose {
+public final class GildedRose {
     private final List<Item> items;
     private static final Integer MAX_QUALITY = 50;
     private static final Integer MIN_QUALITY = 0;
