@@ -1,1 +1,14 @@
-rootProject.name = 'gilded-rose-kata'
+rootProject.name = 'gilded-rose-kata-finished'
+
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            version('junit-jupiter', '5.9.0')
+
+            library('junitApi', 'org.junit.jupiter', 'junit-jupiter-api').versionRef('junit-jupiter')
+            library('junitParams', 'org.junit.jupiter', 'junit-jupiter-params').versionRef('junit-jupiter')
+            library('junitEngine', 'org.junit.jupiter', 'junit-jupiter-engine').versionRef('junit-jupiter')
+        }
+    }
+}
