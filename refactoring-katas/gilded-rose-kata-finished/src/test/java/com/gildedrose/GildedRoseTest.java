@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.gildedrose.ItemType.AGED_BRIE;
 import static com.gildedrose.ItemType.BACKSTAGE_PASSES;
+import static com.gildedrose.ItemType.CONJURED_ITEM;
 import static com.gildedrose.ItemType.SULFURAS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,7 +38,7 @@ class GildedRoseTest {
     @DisplayName("Given a regular item")
     class GivenRegularItem {
         @Nested
-        @DisplayName("When NOT PASSED SELIN DATE")
+        @DisplayName("When NOT PASSED SELLIN DATE")
         class When {
             @Test
             @DisplayName("Then the quality degrades by 1")
@@ -52,8 +53,8 @@ class GildedRoseTest {
         }
 
         @Nested
-        @DisplayName("When PAST SELIN DATE")
-        class WhenPastSelIn {
+        @DisplayName("When PAST SELLIN DATE")
+        class WhenPastSellIn {
             @Test
             @DisplayName("Then the quality degrades by 2")
             void itemsDegrade() {
@@ -86,7 +87,7 @@ class GildedRoseTest {
     @DisplayName("Given aged brie")
     class GivenAgedBrie {
         @Nested
-        @DisplayName("When NOT PASSED SELIN DATE")
+        @DisplayName("When NOT PASSED SELLIN DATE")
         class When {
             @Test
             @DisplayName("Then the quality increases by 1")
@@ -101,8 +102,8 @@ class GildedRoseTest {
         }
 
         @Nested
-        @DisplayName("When PAST SELIN DATE")
-        class WhenPastSelIn {
+        @DisplayName("When PAST SELLIN DATE")
+        class WhenPastSellIn {
             @Test
             @DisplayName("Then the quality increases by 2")
             void itemsDegrade() {
@@ -135,10 +136,10 @@ class GildedRoseTest {
     @DisplayName("Given sulfuras")
     class GivenSulfuras {
         @Nested
-        @DisplayName("When NOT PASSED SELIN DATE")
+        @DisplayName("When NOT PASSED SELLIN DATE")
         class When {
             @Test
-            @DisplayName("The quality or selIn never changes")
+            @DisplayName("The quality or sellIn never changes")
             void itemsDegrade() {
                 storeWith(SULFURAS.getName(), 10, 20);
 
@@ -150,10 +151,10 @@ class GildedRoseTest {
         }
 
         @Nested
-        @DisplayName("When PAST SELIN DATE")
-        class WhenPastSelIn {
+        @DisplayName("When PAST SELLIN DATE")
+        class WhenPastSellIn {
             @Test
-            @DisplayName("The quality or selIn never changes")
+            @DisplayName("The quality or sellIn never changes")
             void itemsDegrade() {
                 storeWith(SULFURAS.getName(), 0, 0);
 
@@ -169,11 +170,11 @@ class GildedRoseTest {
     @DisplayName("Given backstage passes")
     class GivenBackstagePasses {
         @Nested
-        @DisplayName("When SELIN DATE > 10")
+        @DisplayName("When SELLIN DATE > 10")
         class When {
             @Test
             @DisplayName("The quality increases by 1")
-            void itemsDegrade() {
+            void itemQualityIncreasedBy1() {
                 storeWith(BACKSTAGE_PASSES.getName(), 11, 20);
 
                 app.updateAtEndOfDay();
@@ -184,11 +185,11 @@ class GildedRoseTest {
         }
 
         @Nested
-        @DisplayName("When SELIN DATE <= 10")
+        @DisplayName("When SELLIN DATE <= 10")
         class WhenTenOrLess {
             @Test
-            @DisplayName("The quality increases by 1")
-            void itemsDegrade() {
+            @DisplayName("The quality increases by 2")
+            void itemQualityIncreasedBy2() {
                 storeWith(BACKSTAGE_PASSES.getName(), 10, 20);
 
                 app.updateAtEndOfDay();
@@ -199,11 +200,11 @@ class GildedRoseTest {
         }
 
         @Nested
-        @DisplayName("When SELIN DATE <= 5")
+        @DisplayName("When SELLIN DATE <= 5")
         class WhenFiveOrLess {
             @Test
             @DisplayName("The quality increases by 3")
-            void itemsDegrade() {
+            void itemQualityIncreasedBy3() {
                 storeWith(BACKSTAGE_PASSES.getName(), 5, 20);
 
                 app.updateAtEndOfDay();
@@ -218,7 +219,7 @@ class GildedRoseTest {
         class WhenOver50 {
             @Test
             @DisplayName("The quality remains the same")
-            void itemsDegrade() {
+            void itemQualityMax() {
                 storeWith(BACKSTAGE_PASSES.getName(), 5, 49);
 
                 app.updateAtEndOfDay();
@@ -229,17 +230,51 @@ class GildedRoseTest {
         }
 
         @Nested
-        @DisplayName("When PAST SELIN DATE")
-        class WhenPastSelIn {
+        @DisplayName("When PAST SELLIN DATE")
+        class WhenPastSellIn {
             @Test
             @DisplayName("The quality drops to 0")
-            void itemsDegrade() {
+            void itemDegrades() {
                 storeWith(BACKSTAGE_PASSES.getName(), 0, 20);
 
                 app.updateAtEndOfDay();
 
                 assertThat(sellIn()).isEqualTo(-1);
                 assertThat(quality()).isEqualTo(0);
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("Given a conjured item")
+    class GivenConjuredItem {
+        @Nested
+        @DisplayName("When NOT PASSED SELLIN DATE")
+        class When {
+            @Test
+            @DisplayName("The quality decreases by 2")
+            void itemsDegrade() {
+                storeWith(CONJURED_ITEM.getName(), 10, 20);
+
+                app.updateAtEndOfDay();
+
+                assertThat(sellIn()).isEqualTo(9);
+                assertThat(quality()).isEqualTo(18);
+            }
+        }
+
+        @Nested
+        @DisplayName("When PASSED SELLIN DATE")
+        class WhenPastSellIn {
+            @Test
+            @DisplayName("The quality decreases by 4")
+            void itemsDegrade() {
+                storeWith(CONJURED_ITEM.getName(), 0, 20);
+
+                app.updateAtEndOfDay();
+
+                assertThat(sellIn()).isEqualTo(-1);
+                assertThat(quality()).isEqualTo(16);
             }
         }
     }
