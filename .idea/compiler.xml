@@ -6,9 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="gilded-rose-kata" />
+        <module name="gilded-rose-kata-finished" />
         <module name="tdd-katas" />
+        <module name="gilded-rose-kata-start" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gilded-rose-kata.main" target="1.8" />
+      <module name="gilded-rose-kata.test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
