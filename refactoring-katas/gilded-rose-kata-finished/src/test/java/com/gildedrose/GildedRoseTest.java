@@ -38,11 +38,11 @@ class GildedRoseTest {
     @DisplayName("Given a regular item")
     class GivenRegularItem {
         @Nested
-        @DisplayName("When NOT PASSED SELLIN DATE")
+        @DisplayName("When NOT PAST SELLIN DATE")
         class When {
             @Test
             @DisplayName("Then the quality degrades by 1")
-            void itemsDegrade() {
+            void itemDegrades() {
                 storeWith("Vest", 10, 20);
 
                 app.updateAtEndOfDay();
@@ -57,7 +57,7 @@ class GildedRoseTest {
         class WhenPastSellIn {
             @Test
             @DisplayName("Then the quality degrades by 2")
-            void itemsDegrade() {
+            void itemDegrades2() {
                 storeWith("Vest", 0, 20);
 
                 app.updateAtEndOfDay();
@@ -72,7 +72,7 @@ class GildedRoseTest {
         class WhenNoQuality {
             @Test
             @DisplayName("Then the quality remains 0")
-            void itemsDegrade() {
+            void itemQualityMinimum() {
                 storeWith("Vest", 10, 0);
 
                 app.updateAtEndOfDay();
@@ -87,11 +87,11 @@ class GildedRoseTest {
     @DisplayName("Given aged brie")
     class GivenAgedBrie {
         @Nested
-        @DisplayName("When NOT PASSED SELLIN DATE")
+        @DisplayName("When NOT PAST SELLIN DATE")
         class When {
             @Test
             @DisplayName("Then the quality increases by 1")
-            void itemsDegrade() {
+            void itemDegrades() {
                 storeWith(AGED_BRIE.getName(), 10, 20);
 
                 app.updateAtEndOfDay();
@@ -106,7 +106,7 @@ class GildedRoseTest {
         class WhenPastSellIn {
             @Test
             @DisplayName("Then the quality increases by 2")
-            void itemsDegrade() {
+            void itemDegrades2() {
                 storeWith(AGED_BRIE.getName(), 0, 20);
 
                 app.updateAtEndOfDay();
@@ -121,7 +121,7 @@ class GildedRoseTest {
         class WhenOver50 {
             @Test
             @DisplayName("Then the quality stays the same")
-            void itemsDegrade() {
+            void itemQualityIsMaxed() {
                 storeWith(AGED_BRIE.getName(), 0, 49);
 
                 app.updateAtEndOfDay();
@@ -136,11 +136,11 @@ class GildedRoseTest {
     @DisplayName("Given sulfuras")
     class GivenSulfuras {
         @Nested
-        @DisplayName("When NOT PASSED SELLIN DATE")
+        @DisplayName("When NOT PAST SELLIN DATE")
         class When {
             @Test
             @DisplayName("The quality or sellIn never changes")
-            void itemsDegrade() {
+            void itemNeverDegrades() {
                 storeWith(SULFURAS.getName(), 10, 20);
 
                 app.updateAtEndOfDay();
@@ -155,7 +155,7 @@ class GildedRoseTest {
         class WhenPastSellIn {
             @Test
             @DisplayName("The quality or sellIn never changes")
-            void itemsDegrade() {
+            void itemNeverDegrades() {
                 storeWith(SULFURAS.getName(), 0, 0);
 
                 app.updateAtEndOfDay();
@@ -174,7 +174,7 @@ class GildedRoseTest {
         class When {
             @Test
             @DisplayName("The quality increases by 1")
-            void itemQualityIncreasedBy1() {
+            void itemQualityIncreasesBy1() {
                 storeWith(BACKSTAGE_PASSES.getName(), 11, 20);
 
                 app.updateAtEndOfDay();
@@ -189,7 +189,7 @@ class GildedRoseTest {
         class WhenTenOrLess {
             @Test
             @DisplayName("The quality increases by 2")
-            void itemQualityIncreasedBy2() {
+            void itemQualityIncreasesBy2() {
                 storeWith(BACKSTAGE_PASSES.getName(), 10, 20);
 
                 app.updateAtEndOfDay();
@@ -204,7 +204,7 @@ class GildedRoseTest {
         class WhenFiveOrLess {
             @Test
             @DisplayName("The quality increases by 3")
-            void itemQualityIncreasedBy3() {
+            void itemQualityIncreasesBy3() {
                 storeWith(BACKSTAGE_PASSES.getName(), 5, 20);
 
                 app.updateAtEndOfDay();
@@ -219,7 +219,7 @@ class GildedRoseTest {
         class WhenOver50 {
             @Test
             @DisplayName("The quality remains the same")
-            void itemQualityMax() {
+            void itemQualityIsMaxed() {
                 storeWith(BACKSTAGE_PASSES.getName(), 5, 49);
 
                 app.updateAtEndOfDay();
@@ -249,11 +249,11 @@ class GildedRoseTest {
     @DisplayName("Given a conjured item")
     class GivenConjuredItem {
         @Nested
-        @DisplayName("When NOT PASSED SELLIN DATE")
+        @DisplayName("When NOT PAST SELLIN DATE")
         class When {
             @Test
             @DisplayName("The quality decreases by 2")
-            void itemsDegrade() {
+            void itemDegrades() {
                 storeWith(CONJURED_ITEM.getName(), 10, 20);
 
                 app.updateAtEndOfDay();
@@ -264,11 +264,11 @@ class GildedRoseTest {
         }
 
         @Nested
-        @DisplayName("When PASSED SELLIN DATE")
+        @DisplayName("When PAST SELLIN DATE")
         class WhenPastSellIn {
             @Test
             @DisplayName("The quality decreases by 4")
-            void itemsDegrade() {
+            void itemDegradesFast() {
                 storeWith(CONJURED_ITEM.getName(), 0, 20);
 
                 app.updateAtEndOfDay();
