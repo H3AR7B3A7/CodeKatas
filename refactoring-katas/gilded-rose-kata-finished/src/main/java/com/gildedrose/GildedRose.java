@@ -99,11 +99,11 @@ public final class GildedRose {
         return item.sellIn <= EXPIRED;
     }
 
-    private boolean isOverMaxQuality(Integer quality) {
+    private boolean isOverMaxQuality(int quality) {
         return quality > MAX_QUALITY;
     }
 
-    private boolean isUnderMinQuality(Integer quality) {
+    private boolean isUnderMinQuality(int quality) {
         return quality < MIN_QUALITY;
     }
 
