@@ -16,4 +16,6 @@ A kata is an exercise in karate where you repeat a form many, many times, ...*
 ## Refactoring Katas
 
 - [Gilded Rose](refactoring-katas/gilded-rose-kata-finished/README.md)
+  - [Tests](refactoring-katas/gilded-rose-kata-finished/src/test/java/com/gildedrose/GildedRoseTest.java)
+  - [Code](refactoring-katas/gilded-rose-kata-finished/src/main/java/com/gildedrose/GildedRose.java)
 - ...
