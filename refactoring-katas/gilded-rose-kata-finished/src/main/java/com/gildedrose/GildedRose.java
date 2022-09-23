@@ -62,15 +62,11 @@ public final class GildedRose {
     }
 
     private void changeBackstagePassQuality(Item item) {
-        if (isExpired(item)) {
-            item.quality = MIN_QUALITY;
-        } else if (!isNearExpiry(item)) {
-            changeQuality(item, 1);
-        } else if (!isVeryNearExpiry(item)) {
-            changeQuality(item, 2);
-        } else {
-            changeQuality(item, 3);
-        }
+        int updatedQuality = isVeryNearEventDate(item) ?
+            3 : isNearEventDate(item) ?
+            2 : isExpired(item) ?
+            item.quality = MIN_QUALITY : 1;
+        changeQuality(item, updatedQuality);
     }
 
     private boolean isPerishable(Item item) {
@@ -78,21 +74,21 @@ public final class GildedRose {
             .noneMatch(specialItem -> specialItem.equals(item.name));
     }
 
-    private boolean hasSellIn(Item item) {
-        return !item.name.equals(SULFURAS.getName());
-    }
-
     private int getExpiryRate(Item item) {
         int baseRate = isExpired(item) ? -2 : -1;
         return isConjured(item) ? baseRate * 2 : baseRate;
     }
 
-    private boolean isNearExpiry(Item item) {
-        return item.sellIn <= NEAR_EXPIRY;
+    private boolean hasSellIn(Item item) {
+        return !item.name.equals(SULFURAS.getName());
     }
 
-    private boolean isVeryNearExpiry(Item item) {
-        return item.sellIn <= VERY_NEAR_EXPIRY;
+    private boolean isNearEventDate(Item backstagePasses) {
+        return backstagePasses.sellIn <= NEAR_EXPIRY && backstagePasses.sellIn > VERY_NEAR_EXPIRY;
+    }
+
+    private boolean isVeryNearEventDate(Item backstagePasses) {
+        return backstagePasses.sellIn <= VERY_NEAR_EXPIRY && backstagePasses.sellIn > 0;
     }
 
     private boolean isExpired(Item item) {
