@@ -62,11 +62,11 @@ public final class GildedRose {
     }
 
     private void changeBackstagePassQuality(Item item) {
-        int updatedQuality = isVeryNearEventDate(item) ?
+        int qualityIncrease = isVeryNearEventDate(item) ?
             3 : isNearEventDate(item) ?
             2 : isExpired(item) ?
             item.quality = MIN_QUALITY : 1;
-        changeQuality(item, updatedQuality);
+        changeQuality(item, qualityIncrease);
     }
 
     private boolean isPerishable(Item item) {
