@@ -1,7 +1,5 @@
 package com.gildedrose.storeItems;
 
-import com.gildedrose.StoreItem;
-
 public class BackStagePasses extends BaseStoreItem implements StoreItem {
 
     private static final Integer NEAR_EXPIRY = 10;

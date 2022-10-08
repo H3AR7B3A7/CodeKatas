@@ -1,7 +1,5 @@
 package com.gildedrose.storeItems;
 
-import com.gildedrose.StoreItem;
-
 public class Sulfuras extends BaseStoreItem implements StoreItem {
 
     public Sulfuras(String name, int sellIn, int quality) {

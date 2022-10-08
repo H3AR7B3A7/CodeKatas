@@ -1,7 +1,6 @@
 package com.gildedrose.storeItems;
 
 import com.gildedrose.Item;
-import com.gildedrose.StoreItem;
 
 public class BaseStoreItem extends Item implements StoreItem {
 

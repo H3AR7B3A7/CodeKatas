@@ -1,7 +1,5 @@
 package com.gildedrose.storeItems;
 
-import com.gildedrose.StoreItem;
-
 public enum StoreItemFactory {
     BaseStoreItem {
         @Override

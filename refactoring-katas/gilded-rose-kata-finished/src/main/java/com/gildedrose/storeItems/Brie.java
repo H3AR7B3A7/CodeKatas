@@ -1,7 +1,5 @@
 package com.gildedrose.storeItems;
 
-import com.gildedrose.StoreItem;
-
 public class Brie extends BaseStoreItem implements StoreItem {
     public Brie(String name, int sellIn, int quality) {
         super(name, sellIn, quality);

@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import com.gildedrose.storeItems.StoreItem;
 import com.gildedrose.storeItems.StoreItemFactory;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.gildedrose;
+package com.gildedrose.storeItems;
 
 public interface StoreItem {
     Integer MAX_QUALITY = 50;
