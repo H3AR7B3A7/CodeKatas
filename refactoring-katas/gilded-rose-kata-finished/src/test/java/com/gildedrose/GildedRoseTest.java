@@ -324,7 +324,7 @@ class GildedRoseTest {
 
     private static void storeWith(String name, Integer sellIn, Integer quality, boolean conjured) {
         app = new GildedRose(new Item(name, sellIn, quality));
-        app.setAllCojured(conjured);
+        app.setAllConjured(conjured);
     }
 
     private static Integer sellIn() {

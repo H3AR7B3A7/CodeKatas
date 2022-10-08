@@ -30,7 +30,7 @@ public final class GildedRose {
         items.get(position).setConjured(conjured);
     }
 
-    public void setAllCojured(boolean conjured) {
+    public void setAllConjured(boolean conjured) {
         items.forEach(item -> item.setConjured(conjured));
     }
 }
