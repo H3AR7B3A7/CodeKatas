@@ -10,6 +10,7 @@ public interface StoreItem {
     void changeQuality(int delta);
 
     int getSellin();
+
     void setConjured(boolean conjured);
 
     default int getExpiryRate() {

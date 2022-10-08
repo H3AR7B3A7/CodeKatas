@@ -278,10 +278,10 @@ class GildedRoseTest {
     }
 
     /**
-     *  Since we made all items conjurable:
-     *  If conjured items perish 2ce as fast, and brie increases in quality as it perishes,
-     *  should conjured brie gain quality twice as fast?
-     *  What about Backstage Passes?
+     * Since we made all items conjurable:
+     * If conjured items perish 2ce as fast, and brie increases in quality as it perishes,
+     * should conjured brie gain quality twice as fast?
+     * What about Backstage Passes?
      */
 
     @Nested

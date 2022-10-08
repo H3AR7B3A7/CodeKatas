@@ -37,8 +37,9 @@ public class BaseStoreItem extends Item implements StoreItem {
     @Override
     public void changeQuality(int delta) {
         int updatedQuality = quality + delta;
-        quality = isOverMaxQuality(updatedQuality) ?
-            MAX_QUALITY : isUnderMinQuality(updatedQuality) ?
-            MIN_QUALITY : updatedQuality;
+        quality =
+            isOverMaxQuality(updatedQuality) ? MAX_QUALITY :
+                isUnderMinQuality(updatedQuality) ? MIN_QUALITY :
+                    updatedQuality;
     }
 }
