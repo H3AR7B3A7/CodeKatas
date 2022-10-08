@@ -7,8 +7,6 @@ public interface StoreItem {
 
     void updateItem();
 
-    void changeQuality(int delta);
-
     int getSellin();
 
     void setConjured(boolean conjured);
