@@ -13,6 +13,7 @@ public class BackStagePasses extends BaseStoreItem implements StoreItem {
 
     @Override
     public void updateItem() {
+        // TODO : Decide on the behavior of conjured backstage passes
         int qualityIncrease =
             isVeryNearEventDate() ? 3 :
                 isNearEventDate() ? 2 :
@@ -20,7 +21,6 @@ public class BackStagePasses extends BaseStoreItem implements StoreItem {
                         1;
         changeQuality(qualityIncrease);
         sellIn = sellIn - 1;
-        // TODO : Decide on the behavior of conjured backstage passes
     }
 
     private boolean isNearEventDate() {

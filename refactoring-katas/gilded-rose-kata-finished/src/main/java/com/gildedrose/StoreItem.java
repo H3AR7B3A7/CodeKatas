@@ -9,10 +9,13 @@ public interface StoreItem {
 
     int getSellin();
 
+    boolean isConjured();
+
     void setConjured(boolean conjured);
 
-    default int getExpiryRate() {
-        return isExpired() ? -2 : -1;
+    default int getDefaultExpiryRate() {
+        int expiryRate = isExpired() ? -2 : -1;
+        return isConjured() ? expiryRate * 2 : expiryRate;
     }
 
     default boolean isExpired() {

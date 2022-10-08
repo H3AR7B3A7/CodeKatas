@@ -1,6 +1,5 @@
 package com.gildedrose;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -280,13 +279,13 @@ class GildedRoseTest {
     /**
      * Since we made all items conjurable:
      * If conjured items perish 2ce as fast, and brie increases in quality as it perishes,
-     * should conjured brie gain quality twice as fast?
-     * What about Backstage Passes?
+     * should conjured brie gain quality twice as fast? Decision: Yes
+     * What about Backstage Passes? Decision: No
      */
 
     @Nested
     @DisplayName("Given conjured brie")
-    @Disabled // TODO : Remove disabled when we decided on behavior
+//    @Disabled // TODO : Remove disabled when we decided on behavior
     class GivenConjuredBrie {
         @Nested
         @DisplayName("When NOT PAST SELLIN DATE")

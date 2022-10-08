@@ -9,9 +9,8 @@ public class Brie extends BaseStoreItem implements StoreItem {
 
     @Override
     public void updateItem() {
-        int qualityIncrease = isExpired() ? 2 : 1;
-        changeQuality(qualityIncrease);
-        sellIn = sellIn - 1;
         // TODO : Decide on the behavior of conjured brie
+        changeQuality(Math.abs(getDefaultExpiryRate()));
+        sellIn = sellIn - 1;
     }
 }

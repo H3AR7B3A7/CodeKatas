@@ -23,14 +23,18 @@ public class BaseStoreItem extends Item implements StoreItem {
     }
 
     @Override
+    public boolean isConjured() {
+        return conjured;
+    }
+
+    @Override
     public void setConjured(boolean conjured) {
         this.conjured = conjured;
     }
 
     @Override
     public void updateItem() {
-        int expiryRate = conjured ? getExpiryRate() * 2 : getExpiryRate();
-        changeQuality(expiryRate);
+        changeQuality(getDefaultExpiryRate());
         sellIn = sellIn - 1;
     }
 
