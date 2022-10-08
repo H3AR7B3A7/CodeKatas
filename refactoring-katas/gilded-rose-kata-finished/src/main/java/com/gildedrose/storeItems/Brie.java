@@ -12,5 +12,6 @@ public class Brie extends BaseStoreItem implements StoreItem {
         int qualityIncrease = isExpired() ? 2 : 1;
         changeQuality(qualityIncrease);
         sellIn = sellIn - 1;
+        // TODO : Decide on the behavior of conjured brie
     }
 }

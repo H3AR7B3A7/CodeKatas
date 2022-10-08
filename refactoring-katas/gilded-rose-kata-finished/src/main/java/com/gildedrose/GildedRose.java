@@ -24,4 +24,12 @@ public final class GildedRose {
             item.updateItem();
         }
     }
+
+    public void setConjured(int position, boolean conjured) {
+        items.get(position).setConjured(conjured);
+    }
+
+    public void setAllCojured(boolean conjured) {
+        items.forEach(item -> item.setConjured(conjured));
+    }
 }

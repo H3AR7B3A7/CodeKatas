@@ -10,10 +10,10 @@ public interface StoreItem {
     void changeQuality(int delta);
 
     int getSellin();
+    void setConjured(boolean conjured);
 
     default int getExpiryRate() {
-        int baseRate = isExpired() ? -2 : -1;
-        return isConjured() ? baseRate * 2 : baseRate;
+        return isExpired() ? -2 : -1;
     }
 
     default boolean isExpired() {
@@ -26,9 +26,5 @@ public interface StoreItem {
 
     default boolean isUnderMinQuality(int quality) {
         return quality < MIN_QUALITY;
-    }
-
-    default boolean isConjured() {
-        return false;
     }
 }

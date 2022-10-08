@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -242,42 +243,89 @@ class GildedRoseTest {
         }
     }
 
-//    @Nested
-//    @DisplayName("Given a conjured item")
-//    class GivenConjuredItem {
-//        @Nested
-//        @DisplayName("When NOT PAST SELLIN DATE")
-//        class When {
-//            @Test
-//            @DisplayName("The quality decreases by 2")
-//            void itemDegrades() {
-//                storeWith(CONJURED_ITEM, 10, 20);
-//
-//                app.updateQuality();
-//
-//                assertThat(sellIn()).isEqualTo(9);
-//                assertThat(quality()).isEqualTo(18);
-//            }
-//        }
-//
-//        @Nested
-//        @DisplayName("When PAST SELLIN DATE")
-//        class WhenPastSellIn {
-//            @Test
-//            @DisplayName("The quality decreases by 4")
-//            void itemDegradesFast() {
-//                storeWith(CONJURED_ITEM, 0, 20);
-//
-//                app.updateQuality();
-//
-//                assertThat(sellIn()).isEqualTo(-1);
-//                assertThat(quality()).isEqualTo(16);
-//            }
-//        }
-//    }
+    @Nested
+    @DisplayName("Given a regular conjured item")
+    class GivenConjuredItem {
+        @Nested
+        @DisplayName("When NOT PAST SELLIN DATE")
+        class When {
+            @Test
+            @DisplayName("The quality decreases by 2")
+            void itemDegrades() {
+                storeWith("Conjured Mana Cake", 10, 20, true);
 
-    private static void storeWith(String item, Integer sellIn, Integer quality) {
-        app = new GildedRose(new Item(item, sellIn, quality));
+                app.updateQuality();
+
+                assertThat(sellIn()).isEqualTo(9);
+                assertThat(quality()).isEqualTo(18);
+            }
+        }
+
+        @Nested
+        @DisplayName("When PAST SELLIN DATE")
+        class WhenPastSellIn {
+            @Test
+            @DisplayName("The quality decreases by 4")
+            void itemDegradesFast() {
+                storeWith("Conjured Mana Cake", 0, 20, true);
+
+                app.updateQuality();
+
+                assertThat(sellIn()).isEqualTo(-1);
+                assertThat(quality()).isEqualTo(16);
+            }
+        }
+    }
+
+    /**
+     *  Since we made all items conjurable:
+     *  If conjured items perish 2ce as fast, and brie increases in quality as it perishes,
+     *  should conjured brie gain quality twice as fast?
+     *  What about Backstage Passes?
+     */
+
+    @Nested
+    @DisplayName("Given conjured brie")
+    @Disabled // TODO : Remove disabled when we decided on behavior
+    class GivenConjuredBrie {
+        @Nested
+        @DisplayName("When NOT PAST SELLIN DATE")
+        class When {
+            @Test
+            @DisplayName("The quality increases by 2")
+            void itemDegrades() {
+                storeWith(AGED_BRIE, 10, 20, true);
+
+                app.updateQuality();
+
+                assertThat(sellIn()).isEqualTo(9);
+                assertThat(quality()).isEqualTo(22);
+            }
+        }
+
+        @Nested
+        @DisplayName("When PAST SELLIN DATE")
+        class WhenPastSellIn {
+            @Test
+            @DisplayName("The quality increases by 4")
+            void itemDegradesFast() {
+                storeWith(AGED_BRIE, 0, 20, true);
+
+                app.updateQuality();
+
+                assertThat(sellIn()).isEqualTo(-1);
+                assertThat(quality()).isEqualTo(24);
+            }
+        }
+    }
+
+    private static void storeWith(String name, Integer sellIn, Integer quality) {
+        app = new GildedRose(new Item(name, sellIn, quality));
+    }
+
+    private static void storeWith(String name, Integer sellIn, Integer quality, boolean conjured) {
+        app = new GildedRose(new Item(name, sellIn, quality));
+        app.setAllCojured(conjured);
     }
 
     private static Integer sellIn() {
