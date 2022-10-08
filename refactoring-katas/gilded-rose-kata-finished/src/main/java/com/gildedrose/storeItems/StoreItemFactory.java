@@ -11,20 +11,20 @@ public enum StoreItemFactory {
     },
     Brie {
         @Override
-        public StoreItem create(String name, int sellin, int quality) {
-            return new Brie(name, sellin, quality);
+        public StoreItem create(int sellin, int quality) {
+            return new Brie(AGED_BRIE, sellin, quality);
         }
     },
     BackStagePasses {
         @Override
-        public StoreItem create(String name, int sellin, int quality) {
-            return new BackStagePasses(name, sellin, quality);
+        public StoreItem create(int sellin, int quality) {
+            return new BackStagePasses(BACKSTAGE_PASSES, sellin, quality);
         }
     },
     Sulfuras {
         @Override
-        public StoreItem create(String name, int sellin, int quality) {
-            return new Sulfuras(name, sellin, quality);
+        public StoreItem create(int sellin, int quality) {
+            return new Sulfuras(SULFURAS, sellin, quality);
         }
     };
 
@@ -32,14 +32,14 @@ public enum StoreItemFactory {
     public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
 
-    public abstract StoreItem create(String name, int sellin, int quality);
+    public abstract StoreItem create(int sellin, int quality);
 
     public static StoreItem get(String name, int sellin, int quality) {
         return switch (name) {
-            case AGED_BRIE -> Brie.create(name, sellin, quality);
-            case SULFURAS -> Sulfuras.create(name, sellin, quality);
-            case BACKSTAGE_PASSES -> BackStagePasses.create(name, sellin, quality);
-            default -> BaseStoreItem.create(name, sellin, quality);
+            case AGED_BRIE -> Brie.create(sellin, quality);
+            case SULFURAS -> Sulfuras.create(sellin, quality);
+            case BACKSTAGE_PASSES -> BackStagePasses.create(sellin, quality);
+            default -> BaseStoreItem.create(sellin, quality);
         };
     }
 }
