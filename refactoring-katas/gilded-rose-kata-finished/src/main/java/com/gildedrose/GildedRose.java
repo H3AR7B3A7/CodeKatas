@@ -3,13 +3,16 @@ package com.gildedrose;
 import com.gildedrose.storeItems.StoreItem;
 import com.gildedrose.storeItems.StoreItemFactory;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class GildedRose {
+
+    public static final Comparator<Item> NATURAL_ORDER = Comparator
+        .comparing((Item p) -> p.name)
+        .thenComparingInt(p -> p.quality)
+        .thenComparingInt(p -> p.sellIn);
+
     private final List<StoreItem> items;
 
     public GildedRose(Item... items) {
@@ -22,6 +25,10 @@ public final class GildedRose {
 
     public Item[] getItems() {
         return items.stream().map(StoreItem::toItem).toArray(Item[]::new);
+    }
+
+    public Item[] getItems(Comparator<Item> comparator) {
+        return items.stream().map(StoreItem::toItem).sorted(NATURAL_ORDER).toArray(Item[]::new);
     }
 
     public void updateQuality() {
