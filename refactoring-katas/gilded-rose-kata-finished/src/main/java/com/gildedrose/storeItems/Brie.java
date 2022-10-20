@@ -1,8 +1,8 @@
 package com.gildedrose.storeItems;
 
 public class Brie extends BaseStoreItem implements StoreItem {
-    public Brie(String name, int sellIn, int quality) {
-        super(name, sellIn, quality);
+    public Brie(String name, int sellIn, int quality, boolean conjured) {
+        super(name, sellIn, quality, conjured);
     }
 
     @Override

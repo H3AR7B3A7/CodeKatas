@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-public class TexttestFixture {
+public class TextTestFixture {
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
 
@@ -18,7 +18,7 @@ public class TexttestFixture {
 
         GildedRose app = new GildedRose(items);
 
-        int days = 5;
+        int days = 10;
         if (args.length > 0) {
             days = Integer.parseInt(args[0]) + 1;
         }
@@ -26,12 +26,30 @@ public class TexttestFixture {
         for (int i = 0; i < days; i++) {
             System.out.println("-------- day " + i + " --------");
             System.out.println("name, sellIn, quality");
-            for (Item item : items) {
+            for (Item item : app.getItems()) {
                 System.out.println(item);
             }
             System.out.println();
             app.updateQuality();
         }
-    }
 
+        /**
+         * Some more API play
+         */
+        Item[] brie = new Item[] {
+            new Item("Aged Brie", 5, 5), //
+            new Item("Conjured Aged Brie", 5, 5) };
+
+        GildedRose cheeseShop = new GildedRose(brie);
+
+        for (int i = 0; i < days; i++) {
+            System.out.println("-------- day " + i + " --------");
+            System.out.println("name, sellIn, quality");
+            for (Item item : cheeseShop.getItems()) {
+                System.out.println(item);
+            }
+            System.out.println();
+            cheeseShop.updateQuality();
+        }
+    }
 }

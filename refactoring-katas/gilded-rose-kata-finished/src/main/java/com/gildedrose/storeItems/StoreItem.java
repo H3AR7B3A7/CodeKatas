@@ -1,5 +1,7 @@
 package com.gildedrose.storeItems;
 
+import com.gildedrose.Item;
+
 public interface StoreItem {
     Integer MAX_QUALITY = 50;
     Integer MIN_QUALITY = 0;
@@ -8,6 +10,8 @@ public interface StoreItem {
     void updateItem();
 
     int getSellin();
+
+    String getItemName();
 
     boolean isConjured();
 
@@ -29,4 +33,6 @@ public interface StoreItem {
     default boolean isUnderMinQuality(int quality) {
         return quality < MIN_QUALITY;
     }
+
+    Item toItem();
 }

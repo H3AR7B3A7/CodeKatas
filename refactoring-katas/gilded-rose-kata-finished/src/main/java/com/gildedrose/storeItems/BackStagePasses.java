@@ -5,8 +5,8 @@ public class BackStagePasses extends BaseStoreItem implements StoreItem {
     private static final Integer NEAR_EXPIRY = 10;
     private static final Integer VERY_NEAR_EXPIRY = 5;
 
-    public BackStagePasses(String name, int sellIn, int quality) {
-        super(name, sellIn, quality);
+    public BackStagePasses(String name, int sellIn, int quality, boolean conjured) {
+        super(name, sellIn, quality, conjured);
     }
 
     @Override

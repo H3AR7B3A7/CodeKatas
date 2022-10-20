@@ -21,7 +21,7 @@ public final class GildedRose {
     }
 
     public Item[] getItems() {
-        return items.toArray(new Item[0]);
+        return items.stream().map(StoreItem::toItem).toArray(Item[]::new);
     }
 
     public void updateQuality() {

@@ -277,15 +277,15 @@ class GildedRoseTest {
     }
 
     /**
+     * Should only Mana Cakes be conjurable / or all items? All
      * Since we made all items conjurable:
      * If conjured items perish 2ce as fast, and brie increases in quality as it perishes,
-     * should conjured brie gain quality twice as fast? Decision: Yes
+     * should 'conjured brie' gain quality twice as fast? Decision: Yes
      * What about Backstage Passes? Decision: No
      */
 
     @Nested
     @DisplayName("Given conjured brie")
-//    @Disabled // TODO : Remove disabled when we decided on behavior
     class GivenConjuredBrie {
         @Nested
         @DisplayName("When NOT PAST SELLIN DATE")
