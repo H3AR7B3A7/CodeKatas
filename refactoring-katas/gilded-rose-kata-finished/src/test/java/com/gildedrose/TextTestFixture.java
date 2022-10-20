@@ -58,7 +58,7 @@ public class TextTestFixture {
          * API play with conjured item shops convenience methods,
          * and conjured item name mapping
          */
-
+        System.out.println("-------- Conjure store items --------");
         Item[] regularItems = new Item[] {
             new Item("Robe", 5, 5),
             new Item("Staff", 5, 5) };
@@ -71,5 +71,11 @@ public class TextTestFixture {
         Arrays.stream(mageShop.getItems()).forEach(System.out::println);
         mageShop.setConjured(0, true);
         Arrays.stream(mageShop.getItems()).forEach(System.out::println);
+
+        /**
+         * API play with sorted store items
+         */
+        System.out.println("-------- Sorted store --------");
+        Arrays.stream(app.getItems(GildedRose.NATURAL_ORDER)).forEach(System.out::println);
     }
 }
