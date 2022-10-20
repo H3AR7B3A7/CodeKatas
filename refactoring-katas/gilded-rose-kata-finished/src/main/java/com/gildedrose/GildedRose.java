@@ -28,7 +28,7 @@ public final class GildedRose {
     }
 
     public Item[] getItems(Comparator<Item> comparator) {
-        return items.stream().map(StoreItem::toItem).sorted(NATURAL_ORDER).toArray(Item[]::new);
+        return items.stream().map(StoreItem::toItem).sorted(comparator).toArray(Item[]::new);
     }
 
     public void updateQuality() {
