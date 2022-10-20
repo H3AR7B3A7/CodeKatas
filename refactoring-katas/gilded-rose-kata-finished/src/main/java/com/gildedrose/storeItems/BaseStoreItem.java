@@ -28,6 +28,11 @@ public class BaseStoreItem extends Item implements StoreItem {
         this.conjured = conjured;
     }
 
+    /**
+     * By default, an item decreases in quality by 1,
+     * when past expiry by 2, and even double that when conjured.
+     * Sellin decreases by one.
+     */
     @Override
     public void updateItem() {
         changeQuality(getDefaultExpiryRate());

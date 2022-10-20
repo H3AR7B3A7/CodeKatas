@@ -5,9 +5,14 @@ public class Brie extends BaseStoreItem implements StoreItem {
         super(name, sellIn, quality, conjured);
     }
 
+    /**
+     * Brie 'increases' in quality by 1,
+     * like regular items twice as much when spoiled
+     * and even double that when conjured.
+     * Sellin decreases by one.
+     */
     @Override
     public void updateItem() {
-        // TODO : Decide on the behavior of conjured brie
         changeQuality(Math.abs(getDefaultExpiryRate()));
         sellIn = sellIn - 1;
     }

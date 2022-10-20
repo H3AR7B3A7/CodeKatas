@@ -9,9 +9,14 @@ public class BackStagePasses extends BaseStoreItem implements StoreItem {
         super(name, sellIn, quality, conjured);
     }
 
+    /**
+     * Backstage passes quality depends solely on hype,
+     * that is the number of days before expiry,
+     * being conjured does not affect quality.
+     * Sellin decreases by one.
+     */
     @Override
     public void updateItem() {
-        // TODO : Decide on the behavior of conjured backstage passes
         int qualityIncrease =
             isVeryNearEventDate() ? 3 :
                 isNearEventDate() ? 2 :

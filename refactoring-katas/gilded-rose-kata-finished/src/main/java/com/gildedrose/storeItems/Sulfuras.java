@@ -6,8 +6,11 @@ public class Sulfuras extends BaseStoreItem implements StoreItem {
         super(name, sellIn, quality, conjured);
     }
 
+    /**
+     * Sulfuras does not lose quality or have sellin
+     */
     @Override
     public void updateItem() {
-        // Does not lose quality or have sellin
+        // Do nothing
     }
 }
