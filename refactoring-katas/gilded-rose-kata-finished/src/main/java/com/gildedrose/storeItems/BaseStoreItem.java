@@ -47,18 +47,20 @@ public class BaseStoreItem extends Item implements StoreItem {
                     updatedQuality;
     }
 
-    public String getItemName() {
+    @Override
+    public String getFullItemName() {
         String prefix = this.conjured ? "Conjured " : "";
         return prefix + this.name;
     }
 
+    @Override
     public Item toItem() {
-        return new Item(getItemName(), this.sellIn, this.quality);
+        return new Item(getFullItemName(), this.sellIn, this.quality);
     }
 
     @Override
     public String toString() {
-        return "{" + getItemName() + ", " + this.sellIn + ", " + this.quality + "}";
+        return "{" + getFullItemName() + ", " + this.sellIn + ", " + this.quality + "}";
     }
 
     @Override

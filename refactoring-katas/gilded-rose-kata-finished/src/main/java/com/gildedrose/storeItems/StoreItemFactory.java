@@ -31,6 +31,7 @@ public enum StoreItemFactory {
         }
     };
 
+    private static final String MAGIC_WORD = "Conjured ";
     private static final Map<String, StoreItemFactory> nameToEnum =
         Stream.of(values()).collect(
             toMap(Object::toString, e -> e));
@@ -48,8 +49,8 @@ public enum StoreItemFactory {
     abstract StoreItem create(String name, int sellin, int quality, boolean conjured);
 
     public static StoreItem get(String name, int sellin, int quality) {
-        boolean conjured = name.startsWith("Conjured ");
-        String baseName = name.replaceAll("^(Conjured )", "");
+        boolean conjured = name.startsWith(MAGIC_WORD);
+        String baseName = name.replaceAll("^(" + MAGIC_WORD + ")", "");
         return fromString(baseName).create(baseName, sellin, quality, conjured);
     }
 

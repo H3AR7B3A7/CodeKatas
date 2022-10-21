@@ -65,11 +65,11 @@ public class TextTestFixture {
 
         GildedRose mageShop = new GildedRose(regularItems);
 
-        mageShop.setAllConjured(true);
+        mageShop.setConjuredForAllItemsInStore(true);
         Arrays.stream(mageShop.getItems()).forEach(System.out::println);
-        mageShop.setAllConjured(false);
+        mageShop.setConjuredForAllItemsInStore(false);
         Arrays.stream(mageShop.getItems()).forEach(System.out::println);
-        mageShop.setConjured(0, true);
+        mageShop.setConjuredForItemAt(0, true);
         Arrays.stream(mageShop.getItems()).forEach(System.out::println);
 
         /**

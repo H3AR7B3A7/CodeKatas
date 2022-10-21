@@ -11,7 +11,7 @@ public interface StoreItem {
 
     int getSellin();
 
-    String getItemName();
+    String getFullItemName();
 
     boolean isConjured();
 
