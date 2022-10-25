@@ -1,6 +1,6 @@
 package com.gildedrose.storeItems;
 
-public class BackStagePasses extends BaseStoreItem implements StoreItem {
+public class BackStagePasses extends BaseStoreItem {
 
     private static final Integer NEAR_EXPIRY = 10;
     private static final Integer VERY_NEAR_EXPIRY = 5;
