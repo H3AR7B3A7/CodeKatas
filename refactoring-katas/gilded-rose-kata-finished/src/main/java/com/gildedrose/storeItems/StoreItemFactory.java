@@ -9,7 +9,7 @@ public enum StoreItemFactory {
     BaseStoreItem(null) {
         @Override
         StoreItem create(String name, int sellin, int quality, boolean conjured) {
-            return new BaseStoreItem(name, sellin, quality, conjured);
+            return new SimpleStoreItem(name, sellin, quality, conjured);
         }
     },
     Brie("Aged Brie") {

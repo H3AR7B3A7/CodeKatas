@@ -3,9 +3,6 @@ package com.gildedrose.storeItems;
 import com.gildedrose.Item;
 
 public interface StoreItem {
-    Integer MAX_QUALITY = 50;
-    Integer MIN_QUALITY = 0;
-    Integer EXPIRED = 0;
 
     void updateItem();
 
@@ -22,17 +19,11 @@ public interface StoreItem {
         return isConjured() ? expiryRate * 2 : expiryRate;
     }
 
-    default boolean isExpired() {
-        return getSellin() <= EXPIRED;
-    }
+    boolean isExpired();
 
-    default boolean isOverMaxQuality(int quality) {
-        return quality > MAX_QUALITY;
-    }
+    boolean isOverMaxQuality(int quality);
 
-    default boolean isUnderMinQuality(int quality) {
-        return quality < MIN_QUALITY;
-    }
+    boolean isUnderMinQuality(int quality);
 
     Item toItem();
 }

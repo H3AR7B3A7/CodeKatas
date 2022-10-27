@@ -1,6 +1,6 @@
 package com.gildedrose.storeItems;
 
-public class BackStagePasses extends BaseStoreItem {
+public class BackStagePasses extends SimpleStoreItem {
 
     private static final Integer NEAR_EXPIRY = 10;
     private static final Integer VERY_NEAR_EXPIRY = 5;
@@ -20,7 +20,7 @@ public class BackStagePasses extends BaseStoreItem {
         int qualityIncrease =
             isVeryNearEventDate() ? 3 :
                 isNearEventDate() ? 2 :
-                    isExpired() ? quality = MIN_QUALITY :
+                    isExpired() ? quality = 0 :
                         1;
         changeQuality(qualityIncrease);
         sellIn = sellIn - 1;
