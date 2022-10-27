@@ -4,7 +4,7 @@ import com.gildedrose.Item;
 
 import java.util.Objects;
 
-public class SimpleStoreItem extends AbstractStoreItem {
+class SimpleStoreItem extends AbstractStoreItem {
 
     private boolean conjured;
 

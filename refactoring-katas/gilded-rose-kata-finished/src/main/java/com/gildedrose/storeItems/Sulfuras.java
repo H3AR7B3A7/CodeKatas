@@ -1,6 +1,6 @@
 package com.gildedrose.storeItems;
 
-public class Sulfuras extends SimpleStoreItem {
+class Sulfuras extends SimpleStoreItem {
 
     public Sulfuras(String name, int sellIn, int quality, boolean conjured) {
         super(name, sellIn, quality, conjured);

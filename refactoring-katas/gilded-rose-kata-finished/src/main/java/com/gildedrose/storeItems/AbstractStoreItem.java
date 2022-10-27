@@ -2,7 +2,7 @@ package com.gildedrose.storeItems;
 
 import com.gildedrose.Item;
 
-public abstract class AbstractStoreItem extends Item implements StoreItem {
+abstract class AbstractStoreItem extends Item implements StoreItem {
     private static final Integer MAX_QUALITY = 50;
     private static final Integer MIN_QUALITY = 0;
     private static final Integer EXPIRED = 0;
